@@ -18,7 +18,5 @@ deploy:
   provider: heroku
   api_key:
     secure: GRw5+4pIVOuy/ZaOgfMd+1onYKPT+JIKr0mfOCAu+VL54iycw30Zx6uSKpXBzVErnEpEVKq8ZLuownDy6L56TJ34+oxhFbGHRVPR/UlmlkuHLy+/1jg2M96Ep7YpTZOGJviRuQS1fQwO/sftJo5mhrHhhlA6Uw2CvZoqTozOSqtTOzMsgQGrQnUonqWuIlgST/nYwUm5z8Sw4YIRdoPbw6N54v3JAUNAGvSEqcyP5ZlbGqcXIi9HTsjIaaU18frCUetrLRr7XoI4t86PXDZauwhoSbqbj8ln7NzxX0+H+pYIcg3d88XRMybx395lL7drvCmOygAsrBzJIiNXu8O4KhHjXQHN/K1ofusE7MTb68GW2v3aka3x7KJgvkWUKxHhsdigePLKWSukij+0AUH5uV7pgJisky0oCsm5AbBv4KJhYWf1R4kWzxygLg2SBnRc41OYmpNcvCtL+LG6Uqcp8Kz/yMz+5bMNEtr3jMJAGBD/BiImyoO60jWOIjz5DTqwWW+yOhF2IHih3x9/DYdpuGb4EMB331CrYPqqu4Df56oKMG9ku3g7ZIVyGbYOFizr2T5kTmuUmsqGrUyU2djJKDi+IIPVJ+E4NGI/69wxVqylktnvcvypUAlhJTxnOq7Tw66JkKqzZW3xaxOJx6YLORy3R8uT2JF1+t7hzJ27jIM=
-  app: project-crios
-  on:
-    repo: HiddenKiwi/project_crios
-    branch: pre-prod
+  app:
+    pre-prod: project-crios
