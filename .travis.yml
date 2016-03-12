@@ -8,7 +8,7 @@ before_script:
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_dbb92d3b0e7c_key -iv $encrypted_dbb92d3b0e7c_iv
-  -in riotapi.properties.enc -out riotapi.properties -d
+  -in grails-app/conf/riotapi.properties.enc -out grails-app/conf/riotapi.properties -d
 
 script:
 - ./grailsw refresh-dependencies
