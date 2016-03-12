@@ -1,10 +1,27 @@
 language: groovy
+
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/.grails
+
 jdk:
-  - oraclejdk7
+- oraclejdk7
 
 before_script:
- - chmod +x grailsw
+- chmod +x grailsw
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_dbb92d3b0e7c_key -iv $encrypted_dbb92d3b0e7c_iv
+  -in grails-app/conf/riotapi.properties.enc -out grails-app/conf/riotapi.properties -d
 
 script:
-  - ./grailsw refresh-dependencies
-  - ./grailsw "test-app -coverage -xml"
+- ./grailsw refresh-dependencies
+- ./grailsw test-app -coverage -xml --stacktrace
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "WBVXfTAESt++dQuZut9a2hWznGv3KDsmldsiy89pdhbavJVnahufzxjEZYGMB4pa6yOvMUmL75k4JhFNdI3oHi9TZ4Opy+cubhRIah0o8i/sZLcTg7yLJjP9nMa4FwIKjeJXN6UK2/+vTMHCsGP/ep7iRWWJhjgLwqU5c6+e4B6JEUMcnYiLa4AlhrWCiJL35MwZvr60fKmherPDp7IAkXo882BnB75qGOzJFmgUzTONmcwR8+S6RENhyc9D5q4dv6BFvRnS/SfrTQYoY3VfZAfJ4t6hu2FkV76CaTAU7qfhvBUQREV7IzR0WQGS77wLZJN7ve0CutFzBBRkNaqPVWED5JMZOcTJ1XgOAym7ACnP75MbX9O2GcJFRzWClCIk7JIk1QTKGlCAkWd5XhxYjaKETlmRh2bHSW2aJJfYzH4BwToQeXZEeWoybmWiBZ9/9b/Y6as9lXh88hQ8KRwp07jzhdSV9dQmUQMO2ZSjFcKUR+3o0szFXfi87+Wn+onUU5+sfmqYAibpiZ61EBQk3NhzL7nJ8cd3JaZPAjvkXjKOC+9NIZT/TgNV6blQ65G/mKB7dz68vFTq5qz1IE4uPKd/esuvHKUmhLWwDjv1bZFAUACUQmynhUKOhTgk8dIAJiOuNf2EG45TOxCHQv6p/63yw94bQ+9Pn1pb8nY7qRU="
+  app:
+    pre-prod: project-crios
