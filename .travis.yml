@@ -1,5 +1,10 @@
 language: groovy
 
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/.grails
+
 jdk:
 - oraclejdk7
 
