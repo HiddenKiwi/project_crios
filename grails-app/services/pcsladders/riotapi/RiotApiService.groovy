@@ -3,6 +3,7 @@ package pcsladders.riotapi
 import dto.League.League
 import dto.League.LeagueEntry
 import dto.Team.Team
+import grails.util.Environment
 import main.java.riotapi.RiotApiException
 import org.springframework.transaction.annotation.Transactional
 import main.java.riotapi.RiotApi
@@ -13,32 +14,31 @@ import pcsladders.util.TransformTeamDto2Team
 @Transactional
 class RiotApiService {
 
-    // Constantes
     private static final Region API_REGION = Region.EUW
     private static final String PROPERTIES_FILE_NAME = "riotapi.properties"
     private static final String PROPERTY_KEY = "key"
 
-    // Attributs
     RiotApi riotApi
 
-    /**
-     * Constructeur
-     */
     RiotApiService() {
         String apiKey = getApiKey()
         riotApi = new RiotApi(apiKey,API_REGION)
     }
 
-    /**
-     * Retourne la cle pour utiliser l'API Riot. Cette methode recupere la valeur du champ 'cle' du fichier riotapi.properties.
-     * @return la cle API Riot
-     * @throws Exception
-     */
-    String getApiKey() throws IOException, FileNotFoundException, IllegalArgumentException {
+    String getApiKey() {
+        if(Environment.current == Environment.DEVELOPMENT || Environment.current == Environment.TEST) {
+            return getApiKeyFromProperties()
+        }
+        else {
+            return System.getenv("RIOT_KEY");
+        }
+    }
+
+    private String getApiKeyFromProperties() throws IOException, FileNotFoundException, IllegalArgumentException {
         Properties properties = new Properties()
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME)
 
-        if(inputStream != null) {
+        if (inputStream != null) {
             try {
                 properties.load(inputStream)
             }
@@ -48,8 +48,7 @@ class RiotApiService {
             catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException(e.getMessage())
             }
-        }
-        else {
+        } else {
             throw new FileNotFoundException("Le fichier " + PROPERTIES_FILE_NAME + " n'a pas ete trouve")
         }
 
