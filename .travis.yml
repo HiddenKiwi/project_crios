@@ -2,8 +2,8 @@ language: groovy
 
 cache:
   directories:
-  - $HOME/.m2
-  - $HOME/.grails
+  - "$HOME/.m2"
+  - "$HOME/.grails"
 
 jdk:
 - oraclejdk7
@@ -13,15 +13,16 @@ before_script:
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_dbb92d3b0e7c_key -iv $encrypted_dbb92d3b0e7c_iv
-  -in grails-app/conf/riotapi.properties.enc -out grails-app/conf/riotapi.properties -d
+  -in grails-app/conf/riotapi.properties.enc -out grails-app/conf/riotapi.properties
+  -d
 
 script:
-- ./grailsw refresh-dependencies
-- ./grailsw test-app -coverage -xml --stacktrace
+- "./grailsw refresh-dependencies"
+- "./grailsw test-app -coverage -xml --stacktrace"
 
 deploy:
   provider: heroku
   api_key:
-    secure: "WBVXfTAESt++dQuZut9a2hWznGv3KDsmldsiy89pdhbavJVnahufzxjEZYGMB4pa6yOvMUmL75k4JhFNdI3oHi9TZ4Opy+cubhRIah0o8i/sZLcTg7yLJjP9nMa4FwIKjeJXN6UK2/+vTMHCsGP/ep7iRWWJhjgLwqU5c6+e4B6JEUMcnYiLa4AlhrWCiJL35MwZvr60fKmherPDp7IAkXo882BnB75qGOzJFmgUzTONmcwR8+S6RENhyc9D5q4dv6BFvRnS/SfrTQYoY3VfZAfJ4t6hu2FkV76CaTAU7qfhvBUQREV7IzR0WQGS77wLZJN7ve0CutFzBBRkNaqPVWED5JMZOcTJ1XgOAym7ACnP75MbX9O2GcJFRzWClCIk7JIk1QTKGlCAkWd5XhxYjaKETlmRh2bHSW2aJJfYzH4BwToQeXZEeWoybmWiBZ9/9b/Y6as9lXh88hQ8KRwp07jzhdSV9dQmUQMO2ZSjFcKUR+3o0szFXfi87+Wn+onUU5+sfmqYAibpiZ61EBQk3NhzL7nJ8cd3JaZPAjvkXjKOC+9NIZT/TgNV6blQ65G/mKB7dz68vFTq5qz1IE4uPKd/esuvHKUmhLWwDjv1bZFAUACUQmynhUKOhTgk8dIAJiOuNf2EG45TOxCHQv6p/63yw94bQ+9Pn1pb8nY7qRU="
+    secure: l/xRY861FHoc67UqdPF9AviCySxKWCAV/E7T1ZD3/YgtB36wqU6pWp13hSdwL2naC9CFqfmtwziSy+5VSBTBkhSsVi9qQ+t+lmSr8AW7X1DnWyHLYuvucQktBiK7AJgupSs2PCtDAMs+n+kpA5WgdnOAZT3aEqnhvLiA3K3aDeS4aFidlXIpwLSthyMxMOx5/S5c6IgiwIqQCra5m3Zo62KFDMubH9hPA8ntA4Oqb3kSApw6PjkVym35VLtFkGH1J/sT70YrokpSf9ovJWRbuY/v5Z+vPAPpD7xKpnvorlgnGhDyOzzDZJITLED8q1ANk84v1JcGmsziUOObq2Pbo6F3G0S7qnZJm1LwdLXEVURHpK0q2PCV62spYKLC6Vd/1FN3aunlV09Nn5VrJM/OpqQGHRBdDmHptSjr5eevY6cytgiR0ODAWC3ic5knQlOBwRgPpXn2Wxfk/MLsXHWAXJeW4ZKR8JybJ1K/hFUcR+dtvff2FAm39hj/4xeV/B7TPTl2pDUDQwJRZ/yuZhN9nPEG910k2/MQDMbjoJTkFAQHbW+yGzkFbfxI8gnL3kyYe6PLCPY+yhrT4BKUuWPF7x6z4FtGp0tIhpZxPuFDgofJDr6I9ItMB1vfZekSdR8TBr8Hr/dKoBmdB6xweS8mLoaspY3GEtk8WTDhMVfZk8E=
   app:
     pre-prod: project-crios
