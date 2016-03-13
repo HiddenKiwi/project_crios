@@ -8,7 +8,7 @@ jdk:
 before_script:
 - chmod +x grailsw
 before_install:
-- openssl aes-256-cbc -K $encrypted_db33188b55f0_key -iv $encrypted_db33188b55f0_iv
+- openssl aes-256-cbc -K $encrypted_dbb92d3b0e7c_key -iv $encrypted_dbb92d3b0e7c_iv
   -in grails-app/conf/mail.properties.enc -out grails-app/conf/mail.properties -d
 - openssl aes-256-cbc -K $encrypted_dbb92d3b0e7c_key -iv $encrypted_dbb92d3b0e7c_iv
   -in grails-app/conf/riotapi.properties.enc -out grails-app/conf/riotapi.properties
