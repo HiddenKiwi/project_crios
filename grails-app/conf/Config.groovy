@@ -1,3 +1,5 @@
+import grails.util.Environment
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -10,6 +12,16 @@
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
+
+/*//grails.config.locations << "file:${userHome}/.grails/${appName}-mail.properties"
+
+if(!grails.config.location || !(grails.config.location instanceof List)) {
+    grails.config.location = []
+}
+
+grails.config.locations << "file:./grails-app/conf/register-mail.groovy"
+grails.config.locations << "file:./grails-app/conf/mail.properties"
+grails.config.locations << "classpath:mail.properties"*/
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
@@ -135,4 +147,26 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/images/**':    ['permitAll'],
 	'/**/favicon.ico':  ['permitAll']
 ]
+
+grails {
+    mail {
+        if (Environment.current == Environment.DEVELOPMENT || Environment.current == Environment.TEST) {
+            host = System.properties.getProperty("mail.host")
+            port = System.properties.getProperty("mail.port")
+            username = System.properties.getProperty("mail.username")
+            password = System.properties.getProperty("mail.password")
+        }
+        else {
+            host = System.getenv("MAIL_HOST")
+            port = System.getenv("MAIL_PORT")
+            username = System.getenv("MAIL_USERNAME")
+            password = System.getenv("MAIL_PWD")
+        }
+        props = ["mail.smtp.auth":"true",
+                 "mail.smtp.socketFactory.port":"465",
+                 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                 "mail.smtp.socketFactory.fallback":"false"]
+    }
+}
+
 

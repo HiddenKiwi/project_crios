@@ -66,8 +66,8 @@ grails.project.dependency.resolution = {
         compile ":codenarc:0.24.1"
         compile ":quartz:1.0.2"
         compile 'org.grails.plugins:spring-security-core:2.0.0'
-
-
+        compile "org.grails.plugins:spring-security-ui:1.0-RC3"
+        compile ":mail:1.0.7"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.16" // or ":hibernate4:4.3.5.4"

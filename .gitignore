@@ -137,5 +137,7 @@ cobertura.ser
 
 # Properties
 riotapi.properties
+grails-app/conf/mail.properties
 
 node_modules/
+.asscache
